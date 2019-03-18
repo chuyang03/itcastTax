@@ -52,5 +52,25 @@ public class TestMerge {
         TestService testService = (TestService) ctx.getBean("testService");
 
         testService.save(new Person("张飞"));
+
+        System.out.println(testService.findPerson("402881f3698c328e01698c328fa00000").getName());
+    }
+
+    @Test
+    public void testTransactionReadOnly(){  //测试只读事物，如果在只读事物中出现更新操作则回滚
+
+        TestService testService = (TestService) ctx.getBean("testService");
+
+
+        System.out.println(testService.findPerson("402881f3698c328e01698c328fa00000").getName());
+    }
+
+
+    @Test
+    public void testTransactionRollBack(){  //测试回滚事物，如果在操作中出现有任务异常则回滚先前的操作
+
+        TestService testService = (TestService) ctx.getBean("testService");
+
+        testService.save(new Person("关羽"));
     }
 }

@@ -26,12 +26,16 @@ public class TestServiceImpl implements TestService {
     public void save(Person person) {
 
         testDao.save(person);
+
+        //这个地方出现异常，那上面的执行的插入数据库数据回滚，数据库不会插入数据
+        //int i = 1/0;
     }
 
     //查找
     @Override
     public Person findPerson(Serializable id) {
 
+        save(new Person("test"));
 
         return testDao.findPerson(id);
     }
